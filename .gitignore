@@ -1,0 +1,4 @@
+# Fichiers SSH/clés
+*.pub
+id_*
+home*

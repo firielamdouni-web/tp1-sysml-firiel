@@ -1,23 +1,32 @@
-version: "3.9"
-
 services:
-  db:
-    image: postgres:16
-    environment:
-      POSTGRES_USER: demo
-      POSTGRES_PASSWORD: demo
-      POSTGRES_DB: demo
-    ports:
-      - "5432:5432"   # PostgreSQL accessible depuis l’hôte
-    volumes:
-      - db_data:/var/lib/postgresql/data
 
-  api:
-    build: ./api      # Chemin vers le Dockerfile
+  postgres:
+    image: postgres:16
+    env_file: .env
+    volumes:
+      - ./db/init:/docker-entrypoint-initdb.d
+      - pgdata:/var/lib/postgresql/data
     ports:
-      - "8000:8000"   # API FastAPI disponible sur localhost:8000
+      - "5432:5432"
+
+  prefect:
+    build: ./services/prefect
     depends_on:
-      - db            # L'API démarre après la base de données
+      - postgres
+    env_file: .env
+    environment:
+      PREFECT_API_URL: http://0.0.0.0:4200/api
+      PREFECT_UI_URL: http://0.0.0.0:4200
+      PREFECT_LOGGING_LEVEL: INFO
+      POSTGRES_HOST: postgres
+      POSTGRES_PORT: 5432
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      POSTGRES_DB: ${POSTGRES_DB}
+    volumes:
+      - ./services/prefect:/opt/prefect/flows
+      - ./data:/data:ro
 
 volumes:
-  db_data:
+  pgdata:
+

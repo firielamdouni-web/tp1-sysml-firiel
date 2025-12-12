@@ -50,7 +50,7 @@ Que se passe-t-il après l'exécution de cette commande ?
 
 **Question 2.c**
 
-![alt text](captures/exo2quest(c.1)png)
+![alt text](captures/exo2quest(c.1).png)
 
 Pourquoi ?\
 Parce que le conteneur n’avait qu’une seule instruction à exécuter (echo "Bonjour depuis un conteneur Alpine"). Une fois la commande terminée, Docker stoppe automatiquement le conteneur.\

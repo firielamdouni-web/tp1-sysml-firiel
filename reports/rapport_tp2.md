@@ -132,7 +132,7 @@ La fonction snapshot_month(as_of) crée des copies temporelles des tables critiq
 
 **Question 5.b.**
 ![alt text](image-20.png)
-![alt text](image-21.png) #a changer 
+![alt text](image-21.png)  
 
 Pour le mois du 2024-01-31, 7043 lignes ont été créées dans subscriptions_profile_snapshots. Pour le mois du 2024-02-29, 7043 lignes ont également été insérées, indiquant que le même nombre d'utilisateurs est présent dans les deux mois. Aucun nouvel utilisateur n'a été ajouté entre janvier et février. Ces snapshots permettent de figer l'état des données à une date donnée et de comparer les états mensuels des utilisateurs sans altérer les tables live.
 
